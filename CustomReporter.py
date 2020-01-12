@@ -17,9 +17,27 @@ class CustomReporter(neat.reporting.BaseReporter):
         stdout.write('[2K')
         stdout.write("Generation ")
         stdout.write(str(generation))
+        stdout.write(chr(27))
+        stdout.write('[2;1H')
+        stdout.write(chr(27))
+        stdout.write('[2K')
+        stdout.write("Starting generation")
+        stdout.flush()
+
+    def end_generation(self, config, generation, species):
+        stdout.write(chr(27))
+        stdout.write('[2;1H')
+        stdout.write(chr(27))
+        stdout.write('[2K')
+        stdout.write("Generation ended")
         stdout.flush()
     
     def post_evaluate(self, config, pop, species, best):
+        stdout.write(chr(27))
+        stdout.write('[2;1H')
+        stdout.write(chr(27))
+        stdout.write('[2K')
+        stdout.write("Evaluation done")
         stdout.write(chr(27))
         stdout.write('[3;1H')
         stdout.write(chr(27))
