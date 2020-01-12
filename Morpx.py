@@ -14,9 +14,9 @@ def sortedindexes(l):
 
 def getpos(idx):
     x=idx%3
-    y=idx/3%3
-    x2=idx/9%3
-    y2=idx/27
+    y=idx//3%3
+    x2=idx//9%3
+    y2=idx//27
     return x, y, x2, y2
 
 def getNNList(game, player, turn):
@@ -38,7 +38,7 @@ def getNNList(game, player, turn):
     fullGrids=[grid==-1 and 1 or 0 for grid in game.grid]
 
     # Tell AI where it can play         (81)
-    accessibleCells=[game.canPlay(getpos(i)) and 1 or 0 for i in range(81)]
+    accessibleCells=[game.canPlay(*getpos(i)) and 1 or 0 for i in range(81)]
 
     # Merge all the data in a list      (353)
     return selectedPlayer+selectedTurn+ownedCells+enemyCells+ownedGrids+enemyGrids+fullGrids+accessibleCells
@@ -73,7 +73,7 @@ class Morpx:
         if self.ended==0:
             ended=True
             for e in self.grid:
-                if e!=0:
+                if e==0:
                     ended=False
                     break
             if ended:
@@ -104,6 +104,7 @@ class Morpx:
             return False
         if self.getB(self.lastX, self.lastY)==0:
             return x==self.lastX and y==self.lastY
+        return True
     
     @classmethod
     def gamefn(Morpx, n1, n2):
@@ -123,6 +124,6 @@ class Morpx:
                     game.set(x, y, x2, y2, player)
                     hasPlayed=True
                 i+=1
-            player=2 if player==1 else 2
+            player=2 if player==1 else 1
             turn+=1
         return game.ended

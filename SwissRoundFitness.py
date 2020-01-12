@@ -24,15 +24,15 @@ class SwissRoundFitness:
             def play(self, ):
                 self.even=not self.even
                 if self.even:
-                    self.result=gamefn(self.n1, self.n2)
+                    self.results=gamefn(self.n1, self.n2)
                 else:
                     rst=gamefn(self.n2, self.n1)
                     if rst==1:
-                        self.result=2
+                        self.results=2
                     elif rst==2:
-                        self.result=1
+                        self.results=1
                     else:
-                        self.result=-1
+                        self.results=-1
         self.game=GameWrapper
 
     def run(self, genomes, config):
