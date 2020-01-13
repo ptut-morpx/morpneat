@@ -49,8 +49,8 @@ class SwissRoundFitness:
             stdout.write("Round ")
             stdout.write(str(i))
             stdout.flush()
-            tournament.createRound()
-            tournament.playRound()
-            tournament.updateRank()
+            tournament.create_round()
+            tournament.play_round()
+            tournament.update_rank()
         for network in tournament.ranking:
             network.genome.fitness=network.score
