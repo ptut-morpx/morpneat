@@ -43,6 +43,15 @@ def getNNList(game, player, turn):
     # Merge all the data in a list      (353)
     return selectedPlayer+selectedTurn+ownedCells+enemyCells+ownedGrids+enemyGrids+fullGrids+accessibleCells
 
+def play(game, net, player, turn):
+    rst=net.activate(getNNList(game, player, turn))
+    guesses=sortedindexes(rst)
+    for i in range(81):
+        x, y, x2, y2=getpos(guesses[i])
+        if game.canPlay(x, y, x2, y2):
+            game.set(x, y, x2, y2, player)
+            return x, y, x2, y2
+
 class Morpx:
     def __init__(self):
         self.board=[0 for i in range(81)]
@@ -62,9 +71,9 @@ class Morpx:
             hasBig=True
         if self.get(x, y, x2, 0)==self.get(x, y, x2, 1) and self.get(x, y, x2, 1)==self.get(x, y, x2, 2):
             hasBig=True
-        if x2==y2 and self.get(x, y, 0, 0)==self.get(x, y, 1, 1) and self.get(x, y, 1, 1)==self.get(x, y, 2, 2):
+        if self.get(x, y, 0, 0)==value and self.get(x, y, 0, 0)==self.get(x, y, 1, 1) and self.get(x, y, 1, 1)==self.get(x, y, 2, 2):
             hasBig=True
-        if x2==2-y2 and self.get(x, y, 0, 2)==self.get(x, y, 1, 1) and self.get(x, y, 1, 1)==self.get(x, y, 2, 0):
+        if self.get(x, y, 0, 2)==value and self.get(x, y, 0, 2)==self.get(x, y, 1, 1) and self.get(x, y, 1, 1)==self.get(x, y, 2, 0):
             hasBig=True
         if hasBig:
             self.setB(x, y, value)
@@ -88,14 +97,14 @@ class Morpx:
             hasWin=True
         if self.getB(0, y)==self.getB(1, y) and self.getB(1, y)==self.getB(2, y):
             hasWin=True
-        if x==y and self.getB(0, 0)==self.getB(1, 1) and self.getB(1, 1)==self.getB(2, 2):
+        if self.getB(0, 0)==value and self.getB(0, 0)==self.getB(1, 1) and self.getB(1, 1)==self.getB(2, 2):
             hasWin=True
-        if x==2-y and self.getB(0, 2)==self.getB(1, 1) and self.getB(1, 1)==self.getB(2, 0):
+        if self.getB(0, 2)==value and self.getB(0, 2)==self.getB(1, 1) and self.getB(1, 1)==self.getB(2, 0):
             hasWin=True
         if hasWin:
             self.ended=value
     def getB(self, x, y):
-        return self.board[x+3*y]
+        return self.grid[x+3*y]
 
     def canPlay(self, x, y, x2, y2):
         if self.lastX==-1:
