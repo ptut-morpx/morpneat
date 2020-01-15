@@ -109,7 +109,7 @@ class Morpx:
     def canPlay(self, x, y, x2, y2):
         if self.lastX==-1:
             return True
-        if self.get(x, y, x2, y2):
+        if self.get(x, y, x2, y2) or self.getB(x, y):
             return False
         if self.getB(self.lastX, self.lastY)==0:
             return x==self.lastX and y==self.lastY
