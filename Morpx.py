@@ -56,13 +56,24 @@ def play(game, net, player, turn):
             return x, y, x2, y2
 
 class Morpx:
-    def __init__(self):
-        self.board=[0 for i in range(81)]
-        self.grid=[0 for i in range(9)]
-        self.used=[0 for i in range(9)]
-        self.ended=0
-        self.lastX=-1
-        self.lastY=-1
+    def __init__(self, clone=None):
+        if clone:
+            self.board=[i for i in clone.board]
+            self.grid=[i for i in clone.grid]
+            self.used=[i for i in clone.used]
+            self.ended=clone.ended
+            self.lastX=clone.lastX
+            self.lastY=clone.lastY
+        else:
+            self.board=[0 for i in range(81)]
+            self.grid=[0 for i in range(9)]
+            self.used=[0 for i in range(9)]
+            self.ended=0
+            self.lastX=-1
+            self.lastY=-1
+
+    def clone(self):
+        return Morpx(self)
 
     def set(self, x, y, x2, y2, value):
         self.lastX=x2

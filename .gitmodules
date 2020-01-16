@@ -1,3 +1,6 @@
 [submodule "swissround"]
 	path = swissround
 	url = https://github.com/Ara0n/swissround
+[submodule "minmax"]
+	path = minmax
+	url = https://github.com/ptut-morpx/minmax

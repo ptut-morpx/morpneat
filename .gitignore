@@ -1,5 +1,4 @@
 __pycache__/
-neat-checkpoint-*
-neat-rand-checkpoint-*
+neat-*checkpoint-*
 stats.txt
 stats-rand.txt
