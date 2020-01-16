@@ -19,6 +19,9 @@ def getpos(idx):
     y2=idx//27
     return x, y, x2, y2
 
+def listMoves(game):
+    return [move for move in [getpos(i) for i in range(81)] if game.canPlay(*move)]
+
 def getNNList(game, player, turn):
     enemy=2 if player==1 else 1
 
