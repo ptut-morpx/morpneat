@@ -1,3 +1,5 @@
 __pycache__/
 neat-checkpoint-*
+neat-rand-checkpoint-*
 stats.txt
+stats-rand.txt

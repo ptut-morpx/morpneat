@@ -9,7 +9,7 @@ from Morpx import Morpx, play, listMoves
 
 print("Loading network")
 checkpoint = argv[1]
-p = neat.Checkpointer.restore_checkpoint('neat-checkpoint-'+checkpoint)
+p = neat.Checkpointer.restore_checkpoint(checkpoint)
 population = p.population
 config = p.config
 gid = None
@@ -26,6 +26,7 @@ wins=0
 losses=0
 draws=0
 for i in range(100):
+    network.reset()
     turn = 0
     player = 1+(i%2)
     current_player = 1

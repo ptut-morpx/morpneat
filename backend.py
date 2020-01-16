@@ -9,7 +9,7 @@ from Morpx import Morpx, play
 player = int(argv[1][1])
 if player==-1:
     player = 2
-p = neat.Checkpointer.restore_checkpoint('neat-checkpoint-'+argv[2])
+p = neat.Checkpointer.restore_checkpoint(argv[2])
 population = p.population
 config = p.config
 if len(argv)==4:
